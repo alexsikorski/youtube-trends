@@ -13,5 +13,7 @@ Google APIs Client
 ##### Note
 Download YOUR_CLIENT_SECRET_FILE.json and place in directory, this is done following the api setup tutorial provided by Google.
 
+## Running
+1) Run get_data.py, this will produce Json files containing popular YouTube videos with respective meta data.
 ## Author
 Alex Sikorski
