@@ -3,7 +3,7 @@ import pickle
 # tags can change over time, as defined by Google.
 # this script can be easily altered to match new tags.
 
-tag_definitions = {
+topic_definitions = {
     "/m/04rlf": "Music (parent topic)",
     "/m/02mscn": "Christian music",
     "/m/0ggq0m": "Classical music",
@@ -77,7 +77,7 @@ def save_pkl(data, name):
 
 
 def main():
-    save_pkl(tag_definitions, "tag_definitions")
+    save_pkl(topic_definitions, "topic_definitions")
     print("Tag definitions saved...")
 
 

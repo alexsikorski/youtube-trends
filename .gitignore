@@ -1,4 +1,4 @@
 /YOUR_CLIENT_SECRET_FILE.json
 /data/*
 /vid_master.pkl
-/tag_definitions.pkl
+/topic_definitions.pkl
