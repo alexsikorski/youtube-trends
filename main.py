@@ -6,6 +6,7 @@ import json
 
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 
+
 def main():
     page_count = 0
     file_name = "data-"
@@ -47,7 +48,7 @@ def main():
             regionCode="US"
         )
         response = request.execute()
-        print("\rWriting page " + str(page_count)+"/199...", end="")
+        print("\rWriting page " + str(page_count) + "/199...", end="")
         page_count = page_count + 1
 
         with open("data/" + file_name + str(page_count) + ".json", "w") as outfile:
@@ -55,7 +56,6 @@ def main():
 
         if page_count == 199:
             print("\rWriting page " + str(page_count) + "/199... All done!", end="")
-
 
 
 def obtain_page(data_file):
@@ -67,6 +67,7 @@ def obtain_page(data_file):
 
     # path, dirs, files = next(os.walk("data"))
     # file_count = len(files)
+
 
 if __name__ == "__main__":
     main()
