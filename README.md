@@ -16,5 +16,7 @@ Download YOUR_CLIENT_SECRET_FILE.json and place in directory, this is done follo
 ## Running
 1) Run get_data.py, this will produce Json files containing popular YouTube videos with respective meta data.
 2) Run transform.py, this extracts the desired analytical data and and simplifies the format for further processing.
+
+*Optional: Run tag_definer.py if tag definitions are outdated and/or you would like to customise them.*
 ## Author
 Alex Sikorski

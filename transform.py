@@ -4,7 +4,7 @@ import pickle
 videos = []
 
 
-def save_videos(data, name):
+def save_pkl(data, name):
     with open(name + ".pkl", "wb") as f:
         pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
 
@@ -45,7 +45,7 @@ def main():
 
     print("\rOpening file " + str(file_count) + "/200... All done!", end="")
 
-    save_videos(videos, "vid_master")
+    save_pkl(videos, "vid_master")
 
 
 if __name__ == "__main__":
