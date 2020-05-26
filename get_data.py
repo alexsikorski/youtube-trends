@@ -1,14 +1,17 @@
+import json
 import os
+
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
-import json
 
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 
 
 def main():
-    page_count = 0
+    create_folder("./data/")
+
+    page_count = 1
     file_name = "data-"
 
     # Disable OAuthlib's HTTPS verification when running locally.
@@ -19,7 +22,6 @@ def main():
     api_version = "v3"
     client_secrets_file = "YOUR_CLIENT_SECRET_FILE.json"
 
-    # Get credentials and create an API client
     flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
         client_secrets_file, scopes)
     credentials = flow.run_console()
@@ -29,33 +31,30 @@ def main():
     first_request = youtube.videos().list(
         part="snippet,contentDetails,statistics",
         chart="mostPopular",
-        maxResults=10000,
+        maxResults=50,
         regionCode="US"
     )
     first_response = first_request.execute()
 
-    # Dump first response
     with open("data/" + file_name + str(page_count) + ".json", "w") as outfile:
         json.dump(first_response, outfile)
 
-    # Get all responses
-    while page_count < 199:
+    while page_count < 200:
         request = youtube.videos().list(
             part="snippet,contentDetails,statistics",
             chart="mostPopular",
-            maxResults=10000,
+            maxResults=50,
             pageToken=obtain_page("data/" + file_name + str(page_count) + ".json"),
             regionCode="US"
         )
         response = request.execute()
-        print("\rWriting page " + str(page_count) + "/199...", end="")
+        print("\rWriting file " + str(page_count) + "/200...", end="")
         page_count = page_count + 1
 
         with open("data/" + file_name + str(page_count) + ".json", "w") as outfile:
             json.dump(response, outfile)
 
-        if page_count == 199:
-            print("\rWriting page " + str(page_count) + "/199... All done!", end="")
+    print("\rWriting file " + str(page_count) + "/200... All done!", end="")
 
 
 def obtain_page(data_file):
@@ -65,8 +64,13 @@ def obtain_page(data_file):
         if k == "nextPageToken":
             return v
 
-    # path, dirs, files = next(os.walk("data"))
-    # file_count = len(files)
+
+def create_folder(path):
+    try:
+        if not os.path.exists(path):
+            os.makedirs(path)
+    except OSError:
+        print('Error when creating directory. ' + path)
 
 
 if __name__ == "__main__":
