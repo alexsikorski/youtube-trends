@@ -14,6 +14,7 @@ def main():
         print("Title: " + vid.get("title"))
 
         topics = vid.get("topics")
+        topics_no_dupes = []
 
         # defines topic definition
         if topics is not None:
@@ -28,7 +29,7 @@ def main():
 
         print("Topics: " + str(topics_no_dupes))
         print("Tags: " + str(vid.get("tags")))
-        print("Views: " + vid.get("views"))
+        print("Views: " + str(vid.get("views")))
         print("")
 
 
