@@ -29,7 +29,7 @@ def main():
         api_service_name, api_version, credentials=credentials)
 
     first_request = youtube.videos().list(
-        part="snippet,contentDetails,statistics",
+        part="snippet,contentDetails,statistics,topicDetails",
         chart="mostPopular",
         maxResults=50,
         regionCode="US"
@@ -41,7 +41,7 @@ def main():
 
     while page_count < 200:
         request = youtube.videos().list(
-            part="snippet,contentDetails,statistics",
+            part="snippet,contentDetails,statistics,topicDetails",
             chart="mostPopular",
             maxResults=50,
             pageToken=obtain_page("data/" + file_name + str(page_count) + ".json"),
