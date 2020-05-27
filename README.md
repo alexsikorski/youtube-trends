@@ -5,9 +5,11 @@ Python 3.8
 ## Setup
 ##### Libraries
 Google APIs Client
+Matplotlib
 ##### Pip
 * pip install --upgrade google-api-python-client
 * pip install --upgrade google-auth-oauthlib google-auth-httplib2
+* pip install --upgrade matplotlib
 ##### Note
 Download YOUR_CLIENT_SECRET_FILE.json and place in directory, this is done following the api setup tutorial provided by Google.
 ## Running
@@ -18,5 +20,6 @@ Download YOUR_CLIENT_SECRET_FILE.json and place in directory, this is done follo
 ## Feature plan
 * Directory of data stored relative to day date.
 * Directory selection and data visualisation.
+* View topics and respective views followed by a break-down.
 ## Author
 Alex Sikorski

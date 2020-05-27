@@ -13,10 +13,14 @@ def main():
     file_name = "data/data-"
     file_count = 1
 
-    while file_count < 200:
-        f = open(file_name + str(file_count) + ".json", "r", encoding="utf8", errors="ignore")
+    while True:
+        try:
+            f = open(file_name + str(file_count) + ".json", "r", encoding="utf8", errors="ignore")
+        except FileNotFoundError:
+            print("\rAll done!", end="")
+            break
         file_data = json.load(f)
-        print("\rOpening file " + str(file_count) + "/200...", end="")
+        print("\rOpening file data-" + str(file_count) + ".json...", end="")
         file_count = file_count + 1
 
         items = file_data.get("items")
@@ -42,8 +46,6 @@ def main():
                         video["topics"] = value
 
             videos.append(video)
-
-    print("\rOpening file " + str(file_count) + "/200... All done!", end="")
 
     save_pkl(videos, "vid_master")
 

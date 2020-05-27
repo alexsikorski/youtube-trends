@@ -39,22 +39,25 @@ def main():
     with open("data/" + file_name + str(page_count) + ".json", "w") as outfile:
         json.dump(first_response, outfile)
 
-    while page_count < 200:
+    while True:
+        next_page = obtain_page("data/" + file_name + str(page_count) + ".json")
+        if next_page is None:
+            break
         request = youtube.videos().list(
             part="snippet,contentDetails,statistics,topicDetails",
             chart="mostPopular",
             maxResults=50,
-            pageToken=obtain_page("data/" + file_name + str(page_count) + ".json"),
+            pageToken=str(next_page),
             regionCode="US"
         )
         response = request.execute()
-        print("\rWriting file " + str(page_count) + "/200...", end="")
+        print("\rWriting file data-" + str(page_count) + ".json", end="")
         page_count = page_count + 1
 
         with open("data/" + file_name + str(page_count) + ".json", "w") as outfile:
             json.dump(response, outfile)
 
-    print("\rWriting file " + str(page_count) + "/200... All done!", end="")
+    print("\rWriting file data-" + str(page_count) + ".json... All done!", end="")
 
 
 def obtain_page(data_file):
